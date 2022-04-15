@@ -1,5 +1,22 @@
 REGMACH
--------
+=======
+Registermachine with 4 slots and simple arithmetic operators
+
+
+Specifics
+---------
+SLOT0 is reserved for temporary operations, therefore assigning values to this slot is not allowed:
+    
+    Error: provided 'set_value' can not be assigned to 'SLOT0', assigning to SLOT0 is not allowed!. Line: 4
+
+If an operator is used, which isn't specified below the interpreter throws the following error:
+    
+    Error: selected operator invalid or unavailable. Line: 4
+    
+If no file is passed to the file, the interpreter throws this:
+
+    Error: missing file. 32
+
 
 Run
 ---
@@ -7,7 +24,7 @@ Run
     make all
 
 
-.regmach syntax
+REGMACH syntax
 ---------------
 All operations must be between the keywords:
     
@@ -52,3 +69,9 @@ Simple Example:
      STORE  3: {0,22,3,1}
        END  0: {0,22,3,1}
 
+Try Example locally
+------------------
+    
+    git clone https://github.com/xNaCly/register_machine.git regmach
+    cd regmach
+    make example
