@@ -13,7 +13,7 @@ If an operator is used, which isn't specified below the interpreter throws the f
     
     Error: selected operator invalid or unavailable. Line: 4
     
-If no file is passed to the file, the interpreter throws this:
+If no file is passed, the interpreter throws this:
 
     Error: missing file. 32
 
