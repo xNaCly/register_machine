@@ -17,6 +17,9 @@ FILES := $(shell find $(SRC_DIR) -name "*.c")
 COMPILE := $(MANDATORY_FLAGS) $(MY_FLAGS) $(FILES) -lm -o $(BUILD_DIR)/regmach.out
 
 all: main
+	$(BUILD_DIR)/regmach.out
+
+example: main
 	$(BUILD_DIR)/regmach.out example.regmach
 
 main: pre
