@@ -5,17 +5,18 @@
 #define ARR_LENGTH(x) (sizeof(x) / sizeof(x[0]))
 
 int SLOT_ARRAY[] = {0, 0, 0, 0};
-enum Operator { SET = 0, LOAD, ADD, SUB, MULT, DIV, STORE, END = 99 };
+enum Operator { SET = 0, LOADI, LOAD, ADD, SUB, MULT, DIV, STORE, END = 99 };
 const char *const operators[] = {
-    [SET] = "SET",   [LOAD] = "LOAD", [ADD] = "ADD",     [SUB] = "SUB",
-    [MULT] = "MULT", [DIV] = "DIV",   [STORE] = "STORE", [END] = "END",
+    [SET] = "SET",     [LOADI] = "LOADI",[LOAD] = "LOAD",
+    [ADD] = "ADD",     [SUB] = "SUB",
+    [MULT] = "MULT",   [DIV] = "DIV",
+    [STORE] = "STORE", [END] = "END",
 };
 
 void print_slots();
 void reg_log(const int operator, const int slot);
 void die(const char *text, const int line);
-void execute_operation(const int operator, const int slot, const int set_value,
-                       const int line);
+void execute_operation(const int operator, const int slot, const int line);
 int parse_operator(const char *text);
 void parse_file(const char *text);
 
@@ -50,19 +51,13 @@ void die(const char *text, const int line) {
   exit(EXIT_FAILURE);
 }
 
-void execute_operation(const int operator, const int slot, const int set_value,
-                       const int line) {
+void execute_operation(const int operator, const int slot, const int line) {
   switch (operator) {
   case END:
     reg_log(operator, slot);
     exit(EXIT_SUCCESS);
-  case SET:
-    if (slot == 0)
-      die("provided 'set_value' can not be assigned to 'SLOT0', assigning to "
-          "SLOT0 is not allowed!",
-          line);
-    if (set_value != 0 && SLOT_ARRAY[slot] == 0)
-      SLOT_ARRAY[slot] = set_value;
+  case LOADI:
+    SLOT_ARRAY[0] = slot;
     break;
   case LOAD:
     SLOT_ARRAY[0] = SLOT_ARRAY[slot];
@@ -94,6 +89,8 @@ int parse_operator(const char *text) {
     return END;
   } else if (strcmp(text, "SET") == 0) {
     return SET;
+  } else if (strcmp(text, "LOADI") == 0) {
+    return LOADI;
   } else if (strcmp(text, "LOAD") == 0) {
     return LOAD;
   } else if (strcmp(text, "ADD") == 0) {
@@ -125,18 +122,10 @@ void parse_file(const char *text) {
   while (fgets(line, sizeof(line), file)) {
     char operator[100];
     int slot = 0;
-    int value = 0;
-    int parsed_op = -1;
 
     fscanf(file, "%s %d", operator, & slot);
-    parsed_op = parse_operator(operator);
 
-    // only scan for 3. int if the operator is SET
-    if (parsed_op == SET) {
-      fscanf(file, "%d", &value);
-    }
-
-    execute_operation(parse_operator(operator), slot, value, cur_line);
+    execute_operation(parse_operator(operator), slot, cur_line);
     cur_line++;
   }
 

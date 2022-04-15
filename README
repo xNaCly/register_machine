@@ -19,7 +19,7 @@ and
 
 
 Possible Operators:
-    - SET   <SLOT> <VALUE>  : Set SLOT's value to VALUE
+    - LOADI <VALUE>         : Set SLOT0 to VALUE
     - LOAD  <SLOT>          : Load SLOT into SLOT0
     - ADD   <SLOT>          : Add SLOT's value to SLOT0
     - SUB   <SLOT>          : Subtract SLOT's value from SLOT0
@@ -29,26 +29,30 @@ Possible Operators:
     
 Simple Example:
       1 BEGIN
-      2 SET 1 22
-      3 SET 2 3
-      4 LOAD 1
-      5 DIV 2
-      6 MULT 2
-      7 STORE 3
-      8 LOAD 1
-      9 SUB 3
-     10 STORE 3
-     11 END
+      2 LOADI 22 
+      3 STORE 1
+      4 LOADI 3
+      5 STORE 2 
+      6 LOAD 1
+      7 DIV 2
+      8 MULT 2
+      9 STORE 3
+     10 LOAD 1
+     11 SUB 3
+     12 STORE 3
+     13 END
 
-     Result:
-       SET  1: {0,22,0,0}
-       SET  2: {0,22,3,0}
-      LOAD  1: {22,22,3,0}
-       DIV  2: {7,22,3,0}
-      MULT  2: {21,22,3,0}
-     STORE  3: {0,22,3,21}
-      LOAD  1: {22,22,3,21}
-       SUB  3: {1,22,3,21}
-     STORE  3: {0,22,3,1}
-       END  0: {0,22,3,1}
-
+  Result:
+  
+    LOADI 22: {22,0,0,0}
+    STORE  1: {0,22,0,0}
+    LOADI  3: {3,22,0,0}
+    STORE  2: {0,22,3,0}
+     LOAD  1: {22,22,3,0}
+      DIV  2: {7,22,3,0}
+     MULT  2: {21,22,3,0}
+    STORE  3: {0,22,3,21}
+     LOAD  1: {22,22,3,21}
+      SUB  3: {1,22,3,21}
+    STORE  3: {0,22,3,1}
+      END  0: {0,22,3,1}
