@@ -59,9 +59,25 @@ Simple Example:
      12 STORE 3
      13 END
 
+  Result:
+    LOADI 22: {22,0,0,0}
+    STORE  1: {0,22,0,0}
+    LOADI  3: {3,22,0,0}
+    STORE  2: {0,22,3,0}
+     LOAD  1: {22,22,3,0}
+      DIV  2: {7,22,3,0}
+     MULT  2: {21,22,3,0}
+    STORE  3: {0,22,3,21}
+     LOAD  1: {22,22,3,21}
+      SUB  3: {1,22,3,21}
+    STORE  3: {0,22,3,1}
+      END  0: {0,22,3,1}
+
+
 Try Example locally
 ------------------
     
     git clone https://github.com/xNaCly/register_machine.git regmach
     cd regmach
     make example
+
