@@ -4,7 +4,7 @@
 
 #define ARR_LENGTH(x) (sizeof(x) / sizeof(x[0]))
 
-int SLOT_ARRAY[] = {0, 0, 0, 0};
+int SLOT_ARRAY[] = {0, 0, 0, 0, 0, 0, 0};
 enum Operator { SET = 0, LOADI, LOAD, ADD, SUB, MULT, DIV, STORE, END = 99 };
 const char *const operators[] = {
     [SET] = "SET",     [LOADI] = "LOADI",[LOAD] = "LOAD",
