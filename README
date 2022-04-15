@@ -1,0 +1,45 @@
+REGMACH
+-------
+
+Run
+---
+    
+    make all
+
+
+.regmach syntax
+---------------
+All operations must be between the keywords:
+    
+    BEGIN
+
+and 
+
+    END
+
+
+Possible Operators:
+    - SET   <SLOT> <VALUE>  : Set SLOT's value to VALUE
+    - LOAD  <SLOT>          : Load SLOT into SLOT0
+    - ADD   <SLOT>          : Add SLOT's value to SLOT0
+    - SUB   <SLOT>          : Subtract SLOT's value from SLOT0
+    - MULT  <SLOT>          : Multiply SLOT0 with SLOT
+    - DIV   <SLOT>          : Divide SLOT0 with SLOT
+    - STORE <SLOT>          : STORE SLOT0 in SLOT
+    
+Simple Example:
+      1 BEGIN
+      2 SET 1 22
+      3 SET 2 3
+      4 LOAD 1
+      5 DIV 2
+      6 MULT 2
+      7 STORE 3
+      8 LOAD 1
+      9 SUB 3
+     10 STORE 3
+     11 END
+
+     Result:
+     END
+
